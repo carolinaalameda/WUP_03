@@ -16,7 +16,6 @@ davisdata <- read.csv(file="UCDavis.csv")
 ```
 ## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
 ## you choose to sit in??
-According to the chart the back row drink 8.5 more drinks than the middle row, which they drink 3.3 drinks per week, and the front row drinks 1.7 per week. It is reasonable to assume that they are not drinking the same amount.  
 ## Now with ggplot - first select the basic data
 
 ```{r}
@@ -27,7 +26,8 @@ basicCN <- ggplot(davisdata,aes(y=alcohol,x=Seat))
 ```{r}
 basicCN + geom_boxplot()
 ```
-  
+ 
+ According to the chart the back row drink 8.5 more drinks than the middle row, which they drink 3.3 drinks per week, and the front row drinks 1.7 per week. It is reasonable to assume that they are not drinking the same amount.  
   
 ### get fancy  
 
@@ -45,7 +45,12 @@ favstats(alcohol~Seat,data=ucdavis1)
 
   
 ## Inferential Tests
-
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+The P value represents the chances of getting a result like we just obtained if the null hypothesis is actually true. Since the result is so small, I am going to reject the null hypothesis.  
+  
 ## Conclusions
 
 
